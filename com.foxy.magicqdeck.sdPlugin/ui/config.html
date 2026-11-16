@@ -1,0 +1,12 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>MagicQ Deck</title>
+<link rel="stylesheet" href="pi.css"><script src="pi.js"></script></head>
+<body>
+<label for="host" data-i18n="host"></label><input id="host" type="text" placeholder="127.0.0.1">
+<label for="txPort" data-i18n="txPort"></label><input id="txPort" type="number" min="1024" max="65535" placeholder="8000">
+<label for="rxPort" data-i18n="rxPort"></label><input id="rxPort" type="number" min="1024" max="65535" placeholder="9000">
+<label for="showFile" data-i18n="showFile"></label><input id="showFile" type="text" placeholder="auto">
+<small id="hint"></small>
+<small data-i18n="configHelp"></small>
+<script>PI.init({ global: true, fields: ["host", "txPort", "rxPort", "showFile"], onChange: (s) => { document.getElementById("hint").textContent = PI.t("hint", s.txPort || "?", s.rxPort || "?"); } });</script>
+</body></html>

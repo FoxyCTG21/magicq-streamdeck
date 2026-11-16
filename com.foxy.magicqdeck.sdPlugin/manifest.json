@@ -1,0 +1,178 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "SDKVersion": 2,
+  "UUID": "com.foxy.magicqdeck",
+  "Name": "MagicQ Deck",
+  "Version": "1.0.0.0",
+  "Author": "FoxyCTG21",
+  "Description": "Control ChamSys MagicQ from a Stream Deck: executors with automatic names and colours, playbacks, pages and live feedback over OSC.",
+  "URL": "https://github.com/FoxyCTG21/magicq-streamdeck",
+  "Icon": "imgs/plugin",
+  "Category": "MagicQ",
+  "CategoryIcon": "imgs/plugin",
+  "CodePath": "bin/plugin.js",
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "enabled"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "6.9"
+  },
+  "Actions": [
+    {
+      "UUID": "com.foxy.magicqdeck.exec",
+      "Name": "Executor",
+      "Tooltip": "Button of the MagicQ Execute Window by number. It draws its own name and colour.",
+      "Icon": "imgs/action",
+      "PropertyInspectorPath": "ui/exec.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.next",
+      "Name": "Page +",
+      "Tooltip": "Next Execute Window page.",
+      "Icon": "imgs/action",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.prev",
+      "Name": "Page -",
+      "Tooltip": "Previous Execute Window page.",
+      "Icon": "imgs/action",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.goto",
+      "Name": "Go to page",
+      "Tooltip": "Jump straight to an Execute Window page.",
+      "Icon": "imgs/action",
+      "PropertyInspectorPath": "ui/goto.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.pb",
+      "Name": "Playback",
+      "Tooltip": "Play, Pause, Release or Flash of a playback (1-10).",
+      "Icon": "imgs/action",
+      "PropertyInspectorPath": "ui/pb.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.pbnext",
+      "Name": "Playback Page +",
+      "Tooltip": "Next MagicQ playback page.",
+      "Icon": "imgs/action",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.pbprev",
+      "Name": "Playback Page -",
+      "Tooltip": "Previous MagicQ playback page.",
+      "Icon": "imgs/action",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.pageinfo",
+      "Name": "Page indicator",
+      "Tooltip": "Shows the Executor and / or Playback page.",
+      "Icon": "imgs/action",
+      "PropertyInspectorPath": "ui/pageinfo.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "com.foxy.magicqdeck.config",
+      "Name": "MagicQ Settings",
+      "Tooltip": "MagicQ IP, OSC ports and show file. Shows the link status.",
+      "Icon": "imgs/action",
+      "PropertyInspectorPath": "ui/config.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "UserTitleEnabled": false,
+      "States": [
+        {
+          "Image": "imgs/key",
+          "ShowTitle": false
+        }
+      ]
+    }
+  ]
+}

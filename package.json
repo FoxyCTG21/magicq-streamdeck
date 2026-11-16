@@ -1,0 +1,26 @@
+{
+  "name": "magicq-streamdeck",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "node --test test/core.test.js",
+    "pack": "node scripts/pack.mjs",
+    "preview": "node tools-preview.mjs"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "rollup": "^4.0.0"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "^1.4.0"
+  },
+  "description": "Stream Deck plugin for ChamSys MagicQ: executors with automatic names and colours, playbacks, pages and live OSC feedback.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FoxyCTG21/magicq-streamdeck.git"
+  }
+}

@@ -1,0 +1,10 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>MagicQ Deck</title>
+<link rel="stylesheet" href="pi.css"><script src="pi.js"></script></head>
+<body>
+<label for="number" data-i18n="executorNumber"></label><input id="number" type="number" min="1" data-i18n-ph="byPosition">
+<label for="page" data-i18n="fixedPage"></label><input id="page" type="number" min="1" data-i18n-ph="followPage">
+<label for="dir" data-i18n="encoderDir"></label><select id="dir" data-default="up"><option value="up" data-i18n="raise"></option><option value="down" data-i18n="lower"></option></select>
+<small data-i18n="execHelp"></small>
+<script>PI.init({ fields: ["number", "page", "dir"] });</script>
+</body></html>

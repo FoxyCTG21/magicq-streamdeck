@@ -1,0 +1,8 @@
+node_modules/
+dist/
+preview/
+*.log
+# built bundle: attached to releases instead (npm run pack)
+com.foxy.magicqdeck.sdPlugin/bin/plugin.js
+com.foxy.magicqdeck.sdPlugin/logs/*
+!com.foxy.magicqdeck.sdPlugin/logs/.gitkeep

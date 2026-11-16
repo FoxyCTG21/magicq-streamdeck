@@ -1,0 +1,41 @@
+{
+  "Name": "MagicQ Deck",
+  "Description": "Controla ChamSys MagicQ desde un Stream Deck: executors con nombre y color automáticos, playbacks, páginas y feedback en vivo por OSC.",
+  "Category": "MagicQ",
+  "com.foxy.magicqdeck.exec": {
+    "Name": "Executor",
+    "Tooltip": "Botón del Execute Window de MagicQ por número. Se dibuja solo con su nombre y color."
+  },
+  "com.foxy.magicqdeck.next": {
+    "Name": "Página +",
+    "Tooltip": "Siguiente página del Execute Window."
+  },
+  "com.foxy.magicqdeck.prev": {
+    "Name": "Página -",
+    "Tooltip": "Página anterior del Execute Window."
+  },
+  "com.foxy.magicqdeck.goto": {
+    "Name": "Ir a página",
+    "Tooltip": "Salta directamente a una página del Execute Window."
+  },
+  "com.foxy.magicqdeck.pb": {
+    "Name": "Playback",
+    "Tooltip": "Play, Pausa, Release o Flash de un playback (1-10)."
+  },
+  "com.foxy.magicqdeck.pbnext": {
+    "Name": "Playback Página +",
+    "Tooltip": "Siguiente página de playbacks de MagicQ."
+  },
+  "com.foxy.magicqdeck.pbprev": {
+    "Name": "Playback Página -",
+    "Tooltip": "Página anterior de playbacks de MagicQ."
+  },
+  "com.foxy.magicqdeck.pageinfo": {
+    "Name": "Indicador de página",
+    "Tooltip": "Muestra la página de Executor y / o de Playback."
+  },
+  "com.foxy.magicqdeck.config": {
+    "Name": "Configuración MagicQ",
+    "Tooltip": "IP de MagicQ, puertos OSC y archivo del show. Muestra el estado del enlace."
+  }
+}

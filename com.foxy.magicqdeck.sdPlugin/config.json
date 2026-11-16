@@ -1,0 +1,13 @@
+{
+  "show_file": "auto",
+  "magicq_host": "127.0.0.1",
+  "osc_tx_port": 8000,
+  "osc_rx_port": 9000,
+  "item_base": 1,
+  "start_page": 1,
+  "refresh_seconds": 1,
+  "pb_page_start": 1,
+  "pb_page_max": 10,
+  "encoder_repeat_ms": 120,
+  "log_osc": false
+}
