@@ -3,7 +3,7 @@
   "SDKVersion": 2,
   "UUID": "com.foxy.magicqdeck",
   "Name": "MagicQ Deck",
-  "Version": "1.0.0.0",
+  "Version": "1.0.1.0",
   "Author": "FoxyCTG21",
   "Description": "Control ChamSys MagicQ from a Stream Deck: executors with automatic names and colours, playbacks, pages and live feedback over OSC.",
   "URL": "https://github.com/FoxyCTG21/magicq-streamdeck",

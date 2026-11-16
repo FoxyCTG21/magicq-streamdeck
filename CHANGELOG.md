@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1
+
+- Fix: keys no longer dim while pressing buttons very fast. MagicQ stops reporting its state while it is flooded with
+  presses (measured: 26 s of silence at ~12 presses per second); the plugin took that for a closed MagicQ.
+  Silence is now forgiven while keys are being pressed and judged again 8 s after the last press.
+- Fewer OSC state requests (rate limited to one every 400 ms), which also eases the load on MagicQ.
+- The connection-lost log line now says how long MagicQ was silent and how many presses were sent.
+
 ## 1.0.0
 
 First public release.

@@ -175,24 +175,60 @@ const link = new MagicQLink(
 );
 
 // With MagicQ open a feedback dump arrives every ~3 s: 8 s of silence means it is closed / not reachable.
-const LINK_TIMEOUT_MS = 8000;
-const linkOk = () => Date.now() - rx.last < LINK_TIMEOUT_MS;
+// Exception: while keys are being pressed very fast (a dozen presses per second) MagicQ is busy and
+// stops sending its dumps for as long as the flood lasts (measured: 26 s). So silence is forgiven while
+// the user is still pressing, and judged again 8 s after the last press (MagicQ answers within ~3 s once
+// the flood stops). A hard limit keeps a MagicQ that really died from looking alive forever.
+const LINK_SILENCE_MS = 8000;
+const LINK_BUSY_SILENCE_MAX_MS = 60000;
+let lastSendAt = 0; // last key press sent to MagicQ
+const pressTimes = []; // recent press times, for the diagnostic message
+function linkOk() {
+	const now = Date.now();
+	const silence = now - rx.last;
+	if (silence < LINK_SILENCE_MS) return true;
+	return now - lastSendAt < LINK_SILENCE_MS && silence < LINK_BUSY_SILENCE_MAX_MS;
+}
 let linkWas = false;
 
-const requestFeedback = () => link.send(cfg.feedback_address);
+// Feedback requests are rate limited: MagicQ answers with a full dump at most every ~3 s anyway, and
+// flooding it with requests while keys are spammed is counterproductive. Calls inside the minimum gap
+// collapse into a single trailing request.
+const MIN_REQUEST_GAP_MS = 400;
+let lastRequestAt = 0;
+let trailingRequest;
+function requestFeedback() {
+	const wait = lastRequestAt + MIN_REQUEST_GAP_MS - Date.now();
+	if (wait > 0) {
+		if (!trailingRequest) trailingRequest = setTimeout(() => { trailingRequest = undefined; requestFeedback(); }, wait);
+		return;
+	}
+	lastRequestAt = Date.now();
+	link.send(cfg.feedback_address);
+}
 
 // MagicQ does NOT announce changes made through OSC (only those made with the mouse or the console).
-// So after every press the state is requested again several times; this also covers SOLO groups,
-// where activating one button turns the others off.
-let burstTimers = [];
+// So after a press the state is requested again a few times; this also covers SOLO groups,
+// where activating one button turns the others off. The early requests are only armed once per
+// burst of presses, the late ones are re-armed so the last press always gets a final refresh.
+let lateTimers = [];
+let lastEarlyAt = 0;
 function refreshBurst() {
-	burstTimers.forEach(clearTimeout);
-	burstTimers = [30, 90, 200, 400, 700, 1100, 1800, 3000].map((ms) => setTimeout(requestFeedback, ms));
+	const now = Date.now();
+	if (now - lastEarlyAt > 600) {
+		lastEarlyAt = now;
+		for (const ms of [30, 300]) setTimeout(requestFeedback, ms);
+	}
+	lateTimers.forEach(clearTimeout);
+	lateTimers = [900, 1800, 3000].map((ms) => setTimeout(requestFeedback, ms));
 }
 
 const sendOsc = (address, ...args) => {
 	if (cfg.log_osc) log.info(`OSC tx ${address} ${JSON.stringify(args)}`);
 	link.send(address, ...args);
+	lastSendAt = Date.now();
+	pressTimes.push(lastSendAt);
+	while (pressTimes.length && lastSendAt - pressTimes[0] > 10000) pressTimes.shift();
 	refreshBurst();
 };
 
@@ -514,7 +550,9 @@ setInterval(() => {
 	const ok = linkOk();
 	if (ok === linkWas) return;
 	linkWas = ok;
-	log.info(ok ? "MagicQ connected: feedback is arriving" : "MagicQ not reachable: no feedback");
+	log.info(ok
+		? "MagicQ connected: feedback is arriving"
+		: `MagicQ not reachable: no feedback for ${Math.round((Date.now() - rx.last) / 1000)} s (${pressTimes.length} presses in the last 10 s)`);
 	if (!ok) {
 		activeNow.clear();
 		pbLevel.clear();
